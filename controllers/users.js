@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
 exports.findAll = (req, res) =>
-    User.find((err, user) => err
+    User.find((err, users) => err
         ? res.send(500, err.message)
         : res.status(200).jsonp(users));
 
