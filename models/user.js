@@ -1,12 +1,12 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     ObjectId = Schema.Types.ObjectId,
-    TradeProductSchema = require('./trade-product.js');
+    tradeProductSchema = require('./trade-product.js').schema;
 
 var userSchema = new Schema({
     userName: { type: String, unique: true, required: true },
-    wishList: [{type: ObjectId, ref: 'TradeProduct'}],
-    forSale: [{type: ObjectId, ref: 'TradeProduct'}]
+    wishList: [tradeProductSchema],
+    forSale: [tradeProductSchema]
 });
 
 module.exports = mongoose.model('User', userSchema);
