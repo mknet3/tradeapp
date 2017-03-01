@@ -1,9 +1,9 @@
 var express = require("express"),
   app = express(),
   bodyParser = require("body-parser"),
-  methodOverride = require("method-override");
-mongoose = require('mongoose');
-
+  methodOverride = require("method-override"),
+  mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/tradeapp', (err, res) => {
   if (err) throw err;
 });
@@ -17,6 +17,7 @@ require('./models/user')(app, mongoose);
 require('./models/trade-product')(app, mongoose);
 var ProductCtrl = require('./controllers/products');
 var UserCtrl = require('./controllers/users');
+var TradeProductCtrl = require('./controllers/trade-products');
 var router = express.Router();
 
 router.route('/products')
@@ -35,6 +36,15 @@ router.route('/users')
 router.route('/users/:id')
   .get(UserCtrl.findById)
   .delete(UserCtrl.delete);
+
+router.route('/trade-products')
+  .get(TradeProductCtrl.findAll)
+  .post(TradeProductCtrl.add);
+
+router.route('/trade-products/:id')
+  .get(TradeProductCtrl.findById)
+  .put(TradeProductCtrl.update)
+  .delete(TradeProductCtrl.delete);
 
 app.use('/api', router);
 
