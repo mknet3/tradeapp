@@ -1,11 +1,10 @@
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+var mongoose = require('mongoose');
 
-var productSchema = new Schema({
+var productSchema = new mongoose.Schema({
     name: String,
     year: { type: Number, min: 1900, max: 2100 },
-    productIDSource: { type: String, enum: ['ASIN'], required: true },
-    productID: { type: String, required: true, unique: true }
+    IdSource: { type: String, enum: ['ASIN'], required: true },
+    Id: { type: String, required: true, unique: true }
 });
 
 module.exports = mongoose.model('Product', productSchema);

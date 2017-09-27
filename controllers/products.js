@@ -16,8 +16,8 @@ exports.add = (req, res) => {
     var product = new Product({
         name: req.body.name,
         year: req.body.year,
-        productIDSource: req.body.productIDSource,
-        productID: req.body.productID
+        IdSource: req.body.IdSource,
+        Id: req.body.Id
     });
 
     product.save((err, product) => err
@@ -29,8 +29,8 @@ exports.update = (req, res) =>
     Product.findById(req.params.id, (err, product) => {
         product.name = req.body.name;
         product.year = req.body.year;
-        product.productIDSource = req.body.productIDSource;
-        product.productID = req.body.productID;
+        product.IdSource = req.body.IdSource;
+        product.Id = req.body.Id;
 
         product.save((err, product) => err
             ? res.status(500).send(err.message)
